@@ -1,6 +1,4 @@
-//
-// Created by User on 22.02.2021.
-//
+
 #include <cstdint>
 #include <cstring>
 #include <fstream>
@@ -20,6 +18,7 @@ std::vector<std::string> file::SNV_splitFilename(const std::string fileName) {
     return {fileName.substr(0, found) + "/", fileName.substr(found + 1)};
 }
 
+// чтение файла в бинарном режиме
 std::vector<uint32_t> file::SNV_readFileBinary(std::string fileName) {
     std::ifstream input(fileName, std::ios::binary | std::ios::in);
     std::vector<uint32_t> v;
@@ -37,7 +36,7 @@ std::vector<uint32_t> file::SNV_readFileBinary(std::string fileName) {
     return {};
 }
 
-
+// запись файла
 bool file::SNV_writeToFile(std::string path, std::vector<uint32_t> v) {
     std::ofstream output(path);
     if (output.is_open()) {
