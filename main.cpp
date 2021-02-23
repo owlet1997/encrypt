@@ -96,20 +96,26 @@ void SNV_decrypt(const std::string& fileName, std::string keyFile) {
 
 int main(int argc, char *argv[]) {
 
-    if (argc > 2) {
-        if (strcmp(argv[1], "-e") == 0) {
-            genKey(file::SNV_splitFilename(argv[2])[0]);
-            SNV_encrypt(argv[2]);
-        } else if (strcmp(argv[1], "-d") == 0 && argv[3]) {
-            SNV_decrypt(argv[2], argv[3]);
-        } else {
-            std::cerr << "Wrong parameters" << std::endl;
-            return 1;
-        }
-    } else {
-        genKey("");
-        SNV_encrypt("test.txt");
+//    if (argc > 2) {
+//        if (strcmp(argv[1], "-e") == 0) {
+//            genKey(file::SNV_splitFilename(argv[2])[0]);
+//            SNV_encrypt(argv[2]);
+//        } else if (strcmp(argv[1], "-d") == 0 && argv[3]) {
+//            SNV_decrypt(argv[2], argv[3]);
+//        } else {
+//            std::cerr << "Wrong parameters" << std::endl;
+//            return 1;
+//        }
+//    } else {
+//        genKey("");
+//        SNV_encrypt("test.txt");
+//    }
+
+    std::vector<uint32_t> v = file::readWholeFileBinary("test.txt");
+    for (int i = 0; i < v.size(); ++i) {
+        std::cout << v[i] << " ";
     }
+    file::SNV_writeToWholeFile("new.txt", v);
 
     return 0;
 }
