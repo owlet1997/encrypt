@@ -37,31 +37,15 @@ std::vector<uint32_t> file::SNV_readFileBinary(std::string fileName) {
     return {};
 }
 
-//std::vector<uint32_t> file::readWholeFileBinary(std::string fileName) {
-//    std::ifstream input(fileName, std::ios::binary | std::ios::in);
-//    std::vector<uint32_t> v;
-//    if (input.is_open()) {
-//        char *buffer = new char[4];
-//        while (input.read(buffer, 4)) {
-//            uint32_t num;
-//            memcpy(&num, buffer, 4);
-//            v.push_back(num);
-//        }
-//        input.close();
-//        return v;
-//    }
-//    std::cerr << "No file found" << std::endl;
-//    return {};
-//}
 
 bool file::SNV_writeToFile(std::string path, std::vector<uint32_t> v) {
     std::ofstream output(path);
     if (output.is_open()) {
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < v.size(); i++) {
             char *buf = new char[4];
             memcpy(buf, &v[i], 4);
             for (int j = 0; j < 4; j++) {
-                output << buf[j];
+                output << (char) buf[j];
             }
         }
         output.close();
